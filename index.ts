@@ -5,8 +5,8 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.screen.width
 canvas.height = window.screen.height
 const cellDiameter = 10
-const numCols = Math.ceil(canvas.width / cellDiameter)
 const numRows = Math.ceil(canvas.height / cellDiameter)
+const numCols = Math.ceil(canvas.width / cellDiameter)
 
 const getNextGridGen = (grid: Array<Array<number>>) => {
     const nextGrid = grid.map(row => [...row])
@@ -65,8 +65,9 @@ const update = (grid: Array<Array<number>>) => {
     setTimeout(() => requestAnimationFrame(() => update(nextGrid)), 500)
 }
 
+// Seed grid randomly with 0 and 1
 const seedGrid = new Array(numRows).fill(0)
     .map(() => new Array(numCols).fill(0)
-    .map(() => Math.floor(Math.random() * 2)))
+    .map(() => Math.round(Math.random())))
 
 requestAnimationFrame(() => update(seedGrid))
